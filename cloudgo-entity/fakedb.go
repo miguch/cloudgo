@@ -8,13 +8,11 @@ import (
 
 //A fake Database that uses JSON to store user data
 
-
-
 type UserInfo struct {
-	Username string `json:"username"`
-	StudentID string `json:"sid"`
-	Email string `json:"email"`
-	Phone string `json:"phone"`
+	Username string
+	StudentID string
+	Email string
+	Phone string
 }
 
 type User struct {
@@ -63,6 +61,8 @@ func CheckDuplicate(newUser User) bool {
 	return true
 }
 
+
+//Returns true if no duplicate is found
 func CheckPhoneDuplicate(phone string) bool {
 	currentUsers := GetUsers()
 	for _, user := range currentUsers {

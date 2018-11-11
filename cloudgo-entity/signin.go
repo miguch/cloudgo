@@ -7,6 +7,7 @@ import (
 
 func SigninHandler(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
+	//Get username and password from POST parameter
 	name := r.Form.Get("username")
 	pass := r.Form.Get("password")
 	res := CheckSignin(name, pass)
