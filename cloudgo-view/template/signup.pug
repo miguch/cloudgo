@@ -1,0 +1,40 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        title User Sign Up
+        link(rel='stylesheet', type='text/css', href='style.css')
+        script(type='text/javascript', src='https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js')
+        script(type='text/javascript', src='signup.js')
+    body
+        h1 注册
+        #main-area
+            h2 用户注册
+            form(method='post')
+                p
+                    label 用户名:
+                    input(name='username', type='text', placeholder='用户名')
+                p#username-checker.checker.valid
+                p
+                    label 学号:
+                    input(name='number', type='text', placeholder='学号')
+                p#number-checker.checker.valid
+                p
+                    label 密码:
+                    input(name='password', type='password', placeholder='密码')
+                p
+                    label 确认:
+                    input(name='password-sec', type='password', placeholder='再次输入密码')
+                p#password-checker.checker.valid
+                p
+                    label 电话:
+                    input(name='phone', type='text', placeholder='电话')
+                p#phone-checker.checker.valid
+                p
+                    label 邮箱:
+                    input(name='mail', type='text', placeholder='邮箱')
+                p#email-checker.checker.valid
+            input#submit.button(type='submit', value='注册')
+            button#reset.button 重置
+            p#msg.invalid #{.message}
+
