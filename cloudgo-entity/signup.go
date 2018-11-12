@@ -8,7 +8,6 @@ import (
 )
 
 func SignupHandler(w http.ResponseWriter, r *http.Request) {
-	r.ParseForm()
 	registMode := r.Form.Get("register")
 	if registMode == "true" {
 		returnCode := 1

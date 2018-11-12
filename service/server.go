@@ -24,6 +24,14 @@ func NewServer(address string, port uint16, webRoot string) (*Server) {
 
 func (serv *Server) Run() {
 	n := negroni.Classic()
+
+	n.UseFunc(func(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
+		if r.Method == "POST" {
+			r.ParseForm()
+		}
+		next.ServeHTTP(w, r)
+	})
+
 	router := view.NewTemplateRouter(serv.webRoot)
 
 	//process regist info if POST /regist
