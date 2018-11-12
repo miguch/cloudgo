@@ -137,56 +137,56 @@ $ curl 127.0.0.1:8080/
 
    返回状态码为200，注册成功
 
-   4. 检查用户名重复
+4. 检查用户名重复
 
-      ```shell
-      $ curl -v -X POST --data-urlencode "register=false" --data-urlencode "username=aaaaaa" 127.0.0.1:8080/regist
-      
-      Note: Unnecessary use of -X or --request, POST is already inferred.
-      *   Trying 127.0.0.1...
-      * TCP_NODELAY set
-      * Connected to 127.0.0.1 (127.0.0.1) port 8080 (#0)
-      > POST /regist HTTP/1.1
-      > Host: 127.0.0.1:8080
-      > User-Agent: curl/7.54.0
-      > Accept: */*
-      > Content-Length: 30
-      > Content-Type: application/x-www-form-urlencoded
-      >
-      * upload completely sent off: 30 out of 30 bytes
-      < HTTP/1.1 200 OK
-      < Date: Mon, 12 Nov 2018 03:03:23 GMT
-      < Content-Length: 0
-      <
-      * Connection #0 to host 127.0.0.1 left intact
-      ```
+   ```shell
+   $ curl -v -X POST --data-urlencode "register=false" --data-urlencode "username=aaaaaa" 127.0.0.1:8080/regist
+   
+   Note: Unnecessary use of -X or --request, POST is already inferred.
+   *   Trying 127.0.0.1...
+   * TCP_NODELAY set
+   * Connected to 127.0.0.1 (127.0.0.1) port 8080 (#0)
+   > POST /regist HTTP/1.1
+   > Host: 127.0.0.1:8080
+   > User-Agent: curl/7.54.0
+   > Accept: */*
+   > Content-Length: 30
+   > Content-Type: application/x-www-form-urlencoded
+   >
+   * upload completely sent off: 30 out of 30 bytes
+   < HTTP/1.1 200 OK
+   < Date: Mon, 12 Nov 2018 03:03:23 GMT
+   < Content-Length: 0
+   <
+   * Connection #0 to host 127.0.0.1 left intact
+   ```
 
-      无重复，返回200
+   无重复，返回200
 
-      ```shell
-      $ curl -v -X POST --data-urlencode "register=false" --data-urlencode "username=qwert" 127.0.0.1:8080/regist
-      Note: Unnecessary use of -X or --request, POST is already inferred.
-      *   Trying 127.0.0.1...
-      * TCP_NODELAY set
-      * Connected to 127.0.0.1 (127.0.0.1) port 8080 (#0)
-      > POST /regist HTTP/1.1
-      > Host: 127.0.0.1:8080
-      > User-Agent: curl/7.54.0
-      > Accept: */*
-      > Content-Length: 29
-      > Content-Type: application/x-www-form-urlencoded
-      >
-      * upload completely sent off: 29 out of 29 bytes
-      < HTTP/1.1 400 Bad Request
-      < Date: Mon, 12 Nov 2018 03:04:06 GMT
-      < Content-Length: 0
-      <
-      * Connection #0 to host 127.0.0.1 left intact
-      ```
+   ```shell
+   $ curl -v -X POST --data-urlencode "register=false" --data-urlencode "username=qwert" 127.0.0.1:8080/regist
+   Note: Unnecessary use of -X or --request, POST is already inferred.
+   *   Trying 127.0.0.1...
+   * TCP_NODELAY set
+   * Connected to 127.0.0.1 (127.0.0.1) port 8080 (#0)
+   > POST /regist HTTP/1.1
+   > Host: 127.0.0.1:8080
+   > User-Agent: curl/7.54.0
+   > Accept: */*
+   > Content-Length: 29
+   > Content-Type: application/x-www-form-urlencoded
+   >
+   * upload completely sent off: 29 out of 29 bytes
+   < HTTP/1.1 400 Bad Request
+   < Date: Mon, 12 Nov 2018 03:04:06 GMT
+   < Content-Length: 0
+   <
+   * Connection #0 to host 127.0.0.1 left intact
+   ```
 
-      存在重复，返回400
+   存在重复，返回400
 
-   5. 用户登录测试
+5. 用户登录测试
 
       ```shell
       $ curl -v -X POST --data-urlencode "password=123123" --data-urlencode "username=qwert" 127.0.0.1:8080/signin
@@ -261,7 +261,7 @@ $ curl 127.0.0.1:8080/
 
       登录信息错误，返回400 ，内容为1表示密码错误
 
-      6. 进入用户信息页面
+6. 进入用户信息页面
 
          ```shell
          $ curl "127.0.0.1:8080/?username=qwert"
@@ -289,9 +289,9 @@ $ curl 127.0.0.1:8080/
              </div>
          </body>
          ```
-
+    
          用户存在，返回用户详情页的 html
-
+    
          ```shell
          $ curl "127.0.0.1:8080/?username=qwerty"
          
@@ -330,23 +330,23 @@ $ curl 127.0.0.1:8080/
              </body>
          </html>
          ```
-
+    
          查找的用户不存在，返回登录页面和用户不存在的信息。
 
-         ## 使用 ab 工具进行测试
+## 使用 ab 工具进行测试
 
          ab工具全称 Apache Benchmark，用于HTTP 性能测试。
-
+    
          对于本次的应用，使用如下命令进行测试：
-
+    
          ```shell
          ab -n 10000 -c 2000 -r http://127.0.0.1:8080/
          ```
-
+    
          其中`-n`参数表示测试的总请求数，`-c` 表示并发数，`-r` 表示当 socket 出现错误时程序不直接退出。
-
+    
          执行测试的结果如下：
-
+    
          ```shell
          $ ab -n 10000 -c 2000 -r http://127.0.0.1:8080/
          This is ApacheBench, Version 2.3 <$Revision: 1807734 $>
@@ -365,8 +365,9 @@ $ curl 127.0.0.1:8080/
          Completed 9000 requests
          Completed 10000 requests
          Finished 10000 requests
-         
-         
+
+
+​         
          Server Software:
          Server Hostname:        127.0.0.1
          Server Port:            8080
@@ -403,16 +404,16 @@ $ curl 127.0.0.1:8080/
            99%   1676
           100%   1777 (longest request)
          ```
-
+    
          结果中各个信息的意义如下：
-
+    
          ```
          #请求的文档路径
          Document Path:          /
          #请求的文档内容长度
          Document Length:        1277 bytes
          ```
-
+    
          ```
          #完成的请求数
          Complete requests:      10000
@@ -431,7 +432,7 @@ $ curl 127.0.0.1:8080/
          #平均网络流量
          Transfer rate:          3115.53 [Kbytes/sec] received
          ```
-
+    
          ```
          #测试中网络在各个阶段消耗的时间分布
          Connection Times (ms)
@@ -441,7 +442,7 @@ $ curl 127.0.0.1:8080/
          Waiting:        2  536 208.7    591    1587
          Total:          2  696 323.9    671    1777
          ```
-
+    
          ```
          #请求处理时间的分布，如下表90%的请求在 995ms 内处理完成
          Percentage of the requests served within a certain time (ms)
@@ -455,25 +456,25 @@ $ curl 127.0.0.1:8080/
            99%   1676
           100%   1777 (longest request)
          ```
-
+    
          **使用 POST 方法运行 ab 进行测试：**
-
+    
          在 postdata.txt文件中输入如下内容：
-
+    
          ```
          username=qwerty&password=123123
          ```
-
+    
          执行如下命令进行测试：
-
+    
          ```shell
          ab -n 10000 -c 2000 -r  -p postdata.txt -T "application/x-www-form-urlencoded" http://127.0.0.1:8080/signin
          ```
-
+    
          其中`-p` 表示POST 传输的数据，-T 表示content-type头内容。
-
+    
          执行结果如下：
-
+    
          ```shell
          $ ab -n 10000 -c 2000 -r  -p postdata.txt -T "application/x-www-form-urlencoded" http://127.0.0.1:8080/signin
          This is ApacheBench, Version 2.3 <$Revision: 1807734 $>
@@ -492,8 +493,9 @@ $ curl 127.0.0.1:8080/
          Completed 9000 requests
          Completed 10000 requests
          Finished 10000 requests
-         
-         
+
+
+​         
          Server Software:
          Server Hostname:        127.0.0.1
          Server Port:            8080
@@ -534,11 +536,11 @@ $ curl 127.0.0.1:8080/
            99%   2472
           100%   3938 (longest request)
          ```
-
+    
          ## 使用 Docker并进行部署
-
+    
          在 Docker Hub 中连接 GitHub 账号并对该 Repo 启动 automated build即可令 Docker Hub 自动构建应用的 Docker 映像。编写如下的 Dockerfile 对构建进行配置：
-
+    
          ```dockerfile
          FROM golang:1.11
          
@@ -549,14 +551,14 @@ $ curl 127.0.0.1:8080/
          RUN go get -d -v .
          RUN go build -v .
          ```
-
+    
          在docker hub 的build details 中显示完成构建后，在装有 docker 服务的服务器上执行如下命令完成镜像的部署：
-
+    
          ```shell
          #从 Docker Hub 获取镜像
          sudo docker pull miguch/cloudgo
          #创建容器运行镜像，-d 表示容器在后台运行，--name 表示容器名称，-p 表示将容器的8080端口转发到宿主机的8081端口，使容器可以从外部访问
          sudo docker run -d -p 0.0.0.0:8081:8080 --name cloudgo miguch/cloudgo ./cloudgo -a 0.0.0.0
          ```
-
+    
          执行后从浏览器访问`<服务器 ip>:8081` 即可访问应用。
