@@ -263,7 +263,7 @@ $ curl 127.0.0.1:8080/
 
 6. 进入用户信息页面
 
-         ```shell
+   ```shell
          $ curl "127.0.0.1:8080/?username=qwert"
          
          <!DOCTYPE html>
@@ -288,11 +288,11 @@ $ curl 127.0.0.1:8080/
                  <p id="msg" class="valid"></p>
              </div>
          </body>
-         ```
-        
-         用户存在，返回用户详情页的 html
-        
-         ```shell
+   ```
+
+   用户存在，返回用户详情页的 html
+   ​     
+   ```shell
          $ curl "127.0.0.1:8080/?username=qwerty"
          
          <!DOCTYPE html>
@@ -329,22 +329,21 @@ $ curl 127.0.0.1:8080/
                  </div>
              </body>
          </html>
-         ```
-        
-         查找的用户不存在，返回登录页面和用户不存在的信息。
+   ```
+   
+   查找的用户不存在，返回登录页面和用户不存在的信息。
 
 ## 使用 ab 工具进行测试
 
 ab工具全称 Apache Benchmark，用于HTTP 性能测试。
-对于本次的应用，使用如下命令进行测试：
-​    
-```shell
+对于本次的应用，使用如下命令进行测试：  
+```
 ab -n 10000 -c 2000 -r http://127.0.0.1:8080/
 ```
 
 其中`-n`参数表示测试的总请求数，`-c` 表示并发数，`-r` 表示当 socket 出现错误时程序不直接退出。执行测试的结果如下：
 ​    
-```shell
+```
 	$ ab -n 10000 -c 2000 -r http://127.0.0.1:8080/
 	This is ApacheBench, Version 2.3 <$Revision: 1807734 $>
 	Copyright 1996 Adam Twiss, Zeus Technology Ltd, 		http://www.zeustech.net/
@@ -467,7 +466,7 @@ ab -n 10000 -c 2000 -r  -p postdata.txt -T "application/x-www-form-urlencoded" h
 
 其中`-p` 表示POST 传输的数据，-T 表示content-type头内容。
 执行结果如下：
-```shell
+```
 $ ab -n 10000 -c 2000 -r  -p postdata.txt -T "application/x-www-form-urlencoded" http://127.0.0.1:8080/signin
          This is ApacheBench, Version 2.3 <$Revision: 1807734 $>
          Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
